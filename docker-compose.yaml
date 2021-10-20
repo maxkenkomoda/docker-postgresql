@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  sample-postgres:
+    image: postgres:13
+    container_name: "sample-postgres"
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    ports:
+      - "8081:5432"
+    volumes:
+      - database:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+
+#volume to local to keep data
+volumes:
+  database:
+    driver: local
